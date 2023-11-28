@@ -16,7 +16,7 @@ if __name__ == "__main__":
     rest_port = cf.getint("rest", "port")
 
     handler = CrazySrvHandler()
-    controller = Controller(handler, hostname=smtpd_host, port=smtpd_port)
+    controller = Controller(handler, hostname=smtpd_host, port=smtpd_port, ready_timeout=30)
     controller.factory = lambda: SMTP(handler, enable_SMTPUTF8=True)
 
     try:

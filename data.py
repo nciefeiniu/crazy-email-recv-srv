@@ -5,11 +5,11 @@ import json
 
 class DataAccess:
     def __init__(self):
-        self.conn = sqlite3.connect(":memory:", check_same_thread=False);
+        self.conn = sqlite3.connect("email.db", check_same_thread=False)
         c = self.conn.cursor()
-        c.execute("CREATE TABLE msg(frm TEXT, to0 TEXT, tos TEXT, subject TEXT, content TEXT,createDate timestamp)");
-        c.execute("CREATE INDEX index_frm ON msg (frm);")
-        c.execute("CREATE INDEX index_to0 ON msg (to0);")
+        c.execute("CREATE TABLE IF NOT EXISTS msg(frm TEXT, to0 TEXT, tos TEXT, subject TEXT, content TEXT,createDate timestamp)");
+        c.execute("CREATE INDEX IF NOT EXISTS index_frm ON msg (frm);")
+        c.execute("CREATE INDEX IF NOT EXISTS index_to0 ON msg (to0);")
         self.conn.commit()
 
     def store_msg(self, msg):
