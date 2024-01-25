@@ -53,6 +53,15 @@ class CrazySrvHandler:
     dao = dataInstance
 
     async def handle_RCPT(self, server, session, envelope, address, rcpt_options):
+        # 获取所有的收件人地址
+        recipients = envelope.rcpt_tos
+
+        for recipient in recipients:
+            # 判断收件人地址
+            if not recipient.endswith('@email-package.shop'):
+                # 拒绝特定域名的收件人
+                return '550', [], 'FUCK U'
+
         envelope.rcpt_tos.append(address)
         return '250 OK'
 
