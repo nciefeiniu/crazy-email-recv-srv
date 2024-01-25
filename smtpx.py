@@ -62,6 +62,9 @@ class CrazySrvHandler:
                 # 拒绝特定域名的收件人
                 return '550', [], 'FUCK U'
 
+        if not address.endswith('email-package.shop'):
+            return '550', [], 'FUCK U'
+
         envelope.rcpt_tos.append(address)
         return '250 OK'
 
